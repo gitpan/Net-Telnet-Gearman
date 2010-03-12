@@ -1,11 +1,5 @@
 use inc::Module::Install;
 
-if ( -e 'MANIFEST.SKIP' ) {
-    system('pod2text lib/Net/Telnet/Gearman.pm > README');
-}
-
-perl_version '5.006001';
-
 name 'Net-Telnet-Gearman';
 all_from 'lib/Net/Telnet/Gearman.pm';
 
@@ -15,6 +9,17 @@ requires(
 );
 
 test_requires 'Test::More';
+
+perl_version '5.006001';
+
+my @tests = ( 't/*.t' );
+
+if ( -e 'MANIFEST.SKIP' ) {
+    system('pod2text lib/Net/Telnet/Gearman.pm > README');
+    unshift @tests, 'xt/*.t';
+}
+
+tests join ' ', @tests;
 
 auto_install;
 WriteAll;

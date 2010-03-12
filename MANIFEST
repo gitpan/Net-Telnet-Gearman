@@ -18,5 +18,5 @@ MANIFEST			This list of files
 META.yml
 README
 t/00-use.t
-t/99-pod.t
-t/99-pod_coverage.t
+t/01-worker.t
+t/02-function.t

@@ -6,6 +6,24 @@ use base qw/Class::Accessor::Fast/;
 
 __PACKAGE__->mk_accessors(qw/name queue busy free running/);
 
+sub parse_line {
+    my ( $package, $line ) = @_;
+
+    my ( $name, $queue, $busy, $running ) = split /[\s]+/, $line;
+
+    my $free = $running - $busy;
+
+    return $package->new(
+        {
+            name    => $name,
+            queue   => $queue,
+            busy    => $busy,
+            free    => $free,
+            running => $running,
+        }
+    );
+}
+
 =head1 NAME
 
 Net::Telnet::Gearman::Function

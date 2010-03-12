@@ -6,6 +6,21 @@ use base qw/Class::Accessor::Fast/;
 
 __PACKAGE__->mk_accessors(qw/file_descriptor ip_address client_id functions/);
 
+sub parse_line {
+    my ( $package, $line ) = @_;
+
+    my ( $fd, $ip, $cid, $col, @functions ) = split /\s+/, $line;
+
+    return $package->new(
+        {
+            file_descriptor => $fd,
+            ip_address      => $ip,
+            client_id       => $cid,
+            functions       => [@functions],
+        }
+    );
+}
+
 =head1 NAME
 
 Net::Telnet::Gearman::Worker

@@ -6,7 +6,7 @@ use base qw/Net::Telnet/;
 use Net::Telnet::Gearman::Worker;
 use Net::Telnet::Gearman::Function;
 
-our $VERSION = '0.01000';
+our $VERSION = '0.02000';
 
 =head1 NAME
 
@@ -72,17 +72,7 @@ sub workers {
     while ( my $line = $self->getline() ) {
         last if $line eq ".\n";
 
-        my ( $fd, $ip, $cid, @functions ) = split /[\s:]+/, $line;
-
-        push @workers,
-          Net::Telnet::Gearman::Worker->new(
-            {
-                file_descriptor => $fd,
-                ip_address      => $ip,
-                client_id       => $cid,
-                functions       => [@functions],
-            }
-          );
+        push @workers, Net::Telnet::Gearman::Worker->parse_line($line);
     }
 
     return wantarray ? @workers : \@workers;
@@ -108,20 +98,7 @@ sub status {
     while ( my $line = $self->getline() ) {
         last if $line eq ".\n";
 
-        my ( $name, $queue, $busy, $running ) = split /[\s]+/, $line;
-
-        my $free = $running - $busy;
-
-        push @functions,
-          Net::Telnet::Gearman::Function->new(
-            {
-                name    => $name,
-                queue   => $queue,
-                busy    => $busy,
-                free    => $free,
-                running => $running,
-            }
-          );
+        push @functions, Net::Telnet::Gearman::Function->parse_line($line);
     }
 
     return wantarray ? @functions : \@functions;
