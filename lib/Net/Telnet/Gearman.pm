@@ -6,7 +6,7 @@ use base qw/Net::Telnet/;
 use Net::Telnet::Gearman::Worker;
 use Net::Telnet::Gearman::Function;
 
-our $VERSION = '0.02000';
+our $VERSION = '0.03000';
 
 =head1 NAME
 
@@ -60,16 +60,19 @@ perform.
 
 See also: L<Net::Telnet::Gearman::Worker>
 
+This method accepts any parameters the L<Net::Telnet> C<getline>
+method does accept.
+
 =cut
 
 sub workers {
-    my ($self) = @_;
+    my ($self, @args) = @_;
 
     $self->print('workers');
 
     my @workers = ();
 
-    while ( my $line = $self->getline() ) {
+    while ( my $line = $self->getline(@args) ) {
         last if $line eq ".\n";
 
         push @workers, Net::Telnet::Gearman::Worker->parse_line($line);
@@ -86,19 +89,24 @@ running jobs, and the number of capable workers.
 
 See also: L<Net::Telnet::Gearman::Function>
 
+This method accepts any parameters the L<Net::Telnet> C<getline>
+method does accept.
+
 =cut
 
 sub status {
-    my ($self) = @_;
+    my ($self, @args) = @_;
 
     $self->print('status');
 
     my @functions = ();
 
-    while ( my $line = $self->getline() ) {
+    while ( my $line = $self->getline(@args) ) {
         last if $line eq ".\n";
 
-        push @functions, Net::Telnet::Gearman::Function->parse_line($line);
+        next unless my $row = Net::Telnet::Gearman::Function->parse_line($line);
+
+        push @functions, $row;
     }
 
     return wantarray ? @functions : \@functions;

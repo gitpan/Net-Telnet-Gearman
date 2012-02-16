@@ -31,12 +31,18 @@ METHODS
 
     See also: Net::Telnet::Gearman::Worker
 
+    This method accepts any parameters the Net::Telnet "getline" method does
+    accept.
+
   status
     This sends back a list of all registered functions. Next to each
     function is the number of jobs in the queue, the number of running jobs,
     and the number of capable workers.
 
     See also: Net::Telnet::Gearman::Function
+
+    This method accepts any parameters the Net::Telnet "getline" method does
+    accept.
 
   maxqueue
     This sets the maximum queue size for a function. If no size is given,

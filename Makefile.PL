@@ -6,6 +6,7 @@ all_from 'lib/Net/Telnet/Gearman.pm';
 requires(
     'Net::Telnet'     => '3.03',
     'Class::Accessor' => '0.34',
+    'Scalar::Util'    => undef,
 );
 
 test_requires 'Test::More';

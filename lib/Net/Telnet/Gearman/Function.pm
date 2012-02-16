@@ -3,6 +3,7 @@ package Net::Telnet::Gearman::Function;
 use strict;
 use warnings;
 use base qw/Class::Accessor::Fast/;
+use Scalar::Util qw(looks_like_number);
 
 __PACKAGE__->mk_accessors(qw/name queue busy free running/);
 
@@ -10,6 +11,11 @@ sub parse_line {
     my ( $package, $line ) = @_;
 
     my ( $name, $queue, $busy, $running ) = split /[\s]+/, $line;
+
+    return
+      if !looks_like_number($queue)
+          || !looks_like_number($busy)
+          || !looks_like_number($running);
 
     my $free = $running - $busy;
 
