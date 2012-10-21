@@ -1,5 +1,9 @@
 Revision history for Net-Telnet-Gearman
 
+0.04000     Sun Oct 21 2012
+            - Bundle Module::Install 1.06
+              See also: http://goo.gl/TXzhQ
+
 0.03000     Thu Feb 16 2012
             - Skip function lines that do not return numbers for
               the busy, queue or running columns

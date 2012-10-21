@@ -6,7 +6,7 @@ use base qw/Net::Telnet/;
 use Net::Telnet::Gearman::Worker;
 use Net::Telnet::Gearman::Function;
 
-our $VERSION = '0.03000';
+our $VERSION = '0.04000';
 
 =head1 NAME
 

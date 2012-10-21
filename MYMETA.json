@@ -4,7 +4,7 @@
       "Johannes Plunien <plu@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Install version 1.04, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -23,20 +23,20 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.62",
-            "Test::More" : 0
+            "ExtUtils::MakeMaker" : "6.59",
+            "Test::More" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.62"
+            "ExtUtils::MakeMaker" : "6.59"
          }
       },
       "runtime" : {
          "requires" : {
             "Class::Accessor" : "0.34",
             "Net::Telnet" : "3.03",
-            "Scalar::Util" : 0,
+            "Scalar::Util" : "0",
             "perl" : "5.006001"
          }
       }
@@ -47,5 +47,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.03000"
+   "version" : "0.04000"
 }
